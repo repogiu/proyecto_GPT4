@@ -36,7 +36,7 @@ from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from sympy import true
 
-from ProyectoTikTok.config import OPENAI_API_KEY, PLAY_API_KEY, PLAY_USER, LEONARDO_API_KEY, ELEVENLABS_API_KEY
+from ProyectoTikTok.config import OPENAI_API_KEY
 
 import openai
 from openai import OpenAI
