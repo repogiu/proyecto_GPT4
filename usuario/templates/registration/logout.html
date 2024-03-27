@@ -1,0 +1,20 @@
+<body style="background-image: url('/media/fondo/artificial_intelligence.jpg'); background-size: cover; background-position: 80% 50%; background-repeat: no-repeat;">
+{% extends "video_tiktok/base.html" %}
+{% load static %}
+{% block content %}
+<br><br>
+    <div class="card mx-auto mt-3" style="width: 22rem; background-color: #f0f0f0; border-radius: 15px;">
+      <div class="card-body text-center">
+        <img src="{% static 'video_tiktok/logo/logo_azul_brillo.png' %}" class="img-fluid" alt="Logout icon" width="200" />
+        <h5 class="card-title">Has cerrado sesión</h5>
+        <p>Gracias por usar nuestro sitio. Esperamos que hayas disfrutado de los videos y que vuelvas pronto.</p>
+        <a href="{% url 'loguear' %}">
+          <button class="btn btn-primary mb-3" style="filter: saturate(1.5);">Iniciar sesión</button>
+        </a>
+        <br>
+        <a href="{% url 'Usuario' %}">¿No tienes una cuenta? Regístrate aquí</a>
+        <br>
+      </div>
+    </div>
+
+{% endblock %}

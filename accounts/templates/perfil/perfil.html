@@ -1,0 +1,88 @@
+<body style="background: #080f25; overflow-y: scroll;">
+{% extends "video_tiktok/base.html" %}
+{% load static %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<style>
+  hr {
+    border: 0;
+    width: 96%;
+    height: 1px;
+    background-color: rgba(204, 204, 204, 0.3); /* color blanco para el fondo del hr */
+  }
+    .img-profile {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+  }
+</style>
+
+<div class="container my-3" style="background-color: #080f25; color: white;" >
+    <div class="row" >
+        <div class="col-md-4" > <!-- columna de la izquierda -->
+            <div class="card p-3 mb-3" style="background-color: #080f25; color: white; border: 1px solid rgba(204, 204, 204, 0.3); border-radius: 20px;">
+                <div class="body">
+                    <img src="{{ user.profile.image.url }}" class="img-thumbnail rounded-circle mb-3" alt="Foto de perfil" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; background-color: #080f25">
+
+
+
+                    <h3 class="card-title text-light" style="font-weight: bold;">{{ user.first_name}} {{ user.last_name}}</h3>
+                    <h6>DATOS PERSONALES</h6>
+                    <hr>
+                    <p><strong>Nombre de usuario: </strong>{{user.username}}</p>
+                    <p><strong>Email: </strong>{{user.email}}</p>
+                    <p class="card-text">Género: <i class="bi bi-gender-{{ user.profile.gender }}"></i> {{ user.profile.get_gender_display }}</p>
+                    <p class="card-text">Fecha de nacimiento: <i class="bi bi-calendar"></i> {{ user.profile.date_of_birth }}</p>
+                    <p>Localidad: <i class="bi bi-geo-alt"></i>{{ user.profile.location}}</p>
+                    <p class="card-text mt-3">Biografía: {{ user.profile.bio}}</p>
+
+                    <!--<strong>Intereses:</strong>
+                    {% for interest in user.profile.interests.all %}
+                        <span class="badge badge-sm bg-secondary">{{ interest.name | upper }}</span>
+                    {% endfor %}-->
+                    <hr>
+                    <a href="{% url 'editar_perfil' %}" class="btn btn-outline-secondary w-100 mb-2">Editar perfil</a>
+                    <br>
+                    {% if request.user.is_authenticated %}
+                                <form action="{% url 'logout' %}" method="post">
+                                  {% csrf_token %}
+                                  <button type="submit" class="btn btn-danger w-100">Cerrar sesión</button>
+                                </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7"> <!-- Esta es la columna de la derecha -->
+            <div class="card p-3 mb-3" style="background-color: #080f25; color: white; border: 1px solid rgba(204, 204, 204, 0.3); border-radius: 20px;">
+
+
+                    <p class="card-text">Créditos disponibles:  {{ creditos_usuario.creditos }}</p>
+                    <div class="historial">
+                      <!--<p class="card-text">Historial de créditos: {{ creditos_usuario.historial }}</p>-->
+                      <p class="card-text">Historial de créditos:</p>
+                      <ol style="list-style-type: none;">
+                          {% for linea in user.historial.strip.splitlines %}
+                            <li>{{ linea }}</li>
+                          {% endfor %}
+                      </ol>
+                    </div>
+
+
+                    <hr class="lead text-muted">
+                    <div >
+                      <a href="#" class="btn btn-outline-light w-60 mb-2">Recargar Créditos</a>
+                    </div>
+
+
+
+            </div>
+        </div>
+    </div> <!-- cierre de fila -->
+
+</div>
+
+
+{% endif %}
+{% endblock %}

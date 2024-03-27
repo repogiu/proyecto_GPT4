@@ -1,0 +1,341 @@
+:root {
+    --primary: #080f25;
+    --light: #080f25;
+    --grey: #000000; /* Spinners: #20216E */
+    --secundary: #26272C; /*#0c1734*/
+}
+
+body {
+    overflow: hidden;
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+    color: var(--primary);
+
+}
+
+
+a:hover {
+    text-decoration: none;
+}
+
+.bg-primary { background-color: var(--primary) !important; }
+
+.bg-light { background-color: var(--light) !important; }
+
+.bg-grey { background-color: var(--grey) !important; }
+
+.bg-secundary {background-color: var(--secundary) !important;}
+
+.card {
+
+}
+
+.btn-primary {
+    border: 0;
+    background-image: linear-gradient(to right, darkblue, blue);
+
+}
+.texto-degradado {
+    background-image: linear-gradient(to right, blue, grey);
+    background-clip: text;
+    color: transparent;
+}
+
+.texto-blanco {
+    background-image: linear-gradient(to right, white, grey);
+    background-clip: text;
+    color: transparent;
+}
+.blue{
+    background-image: linear-gradient(to right, blue, grey);
+    background-clip: text;
+    color: transparent;
+}
+
+.btn-primary:hover {
+    opacity: 0.7;
+    background-color: #013983;
+}
+
+/*Mensaje de bienvenida*/
+.btn-link:hover {
+  text-decoration: none !important;
+}
+.btn-link:focus {
+  text-decoration: none !important;
+}
+
+#sidebar-container {
+    min-height: 100vh;
+     width: 18%;
+      border-right: 2.5px solid gray;
+
+}
+
+
+#sidebar-container .logo{
+    padding: 0.875rem 1.25rem;
+}
+
+#sidebar-container .menu {
+    width: 25rem;
+}
+
+#content {
+    overflow-y: auto; /* que todo el contenido que este dentro de content si se pueda hacer scroll */
+    height: 100vh;
+    padding-bottom: 5rem;
+}
+
+.avatar {
+    max-width: 35px;
+}
+
+.btn-search {
+    right: 5px;
+}
+
+.scrollable-card {
+    max-height: 1000px;
+    overflow-y: auto !important;
+}
+
+.thumbnail {
+  width: 100px; /* Ajusta el tamaño de la miniatura */
+  cursor: pointer;
+}
+
+.form-control{
+    border: 1px solid rgba(204, 204, 204, 0.3);
+}
+
+.icono {
+  vertical-align: middle;
+  margin: 0 20px 0 5px;
+  font-size: 20px;
+}
+
+
+/* Spinners */
+.title_spinner {
+    color: white;
+    text-align: center;
+    font-size: 18px;
+
+}
+.spinner-container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+}
+
+.alert-success {
+  background-color: #3C763C; /* color de fondo verde */
+  color: #ffffff; /* color de texto blanco */
+}
+
+#successAlert, successAlertImg {
+  display: none;
+}
+
+/* Tilde verde */
+
+/* Estilo para el span que contiene el texto y el icono */
+.text-white {
+  vertical-align: middle; /* Alinear verticalmente al medio */
+  margin-top: 7px;
+}
+
+/* Estilo para el icono de tilde */
+.fa-check-circle {
+  margin-right: 5px; /* Margen derecho de 5px */
+  margin-top: 5px; /* Margen superior de 0px */
+  vertical-align: middle; /* Alinear verticalmente al medio */
+}
+
+/* Monedas */
+.coin {
+    color: gold;
+    transition: transform 0.5s;
+    margin-right: 10px;
+    font-size: 1.4em;
+}
+
+.coin:hover {
+    transform: rotateY(180deg);
+}
+
+
+
+
+
+
+
+/*
+input:required:valid {
+  border-color: green !important;
+}
+
+input:valid {
+  border: 2px solid green !important; /* Cambiar el color del borde a verde si el campo es válido */
+}
+*/
+
+
+
+/* recuperar contraseña */
+.modalContainer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 9999;
+}
+
+.card-link::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s;
+}
+
+.card-link:hover::after {
+  width: 100%;
+}
+
+
+.modalContainer:target {
+  display: block;
+}
+
+.modal-content {
+  position: relative;
+  margin: 10% auto;
+  width: 400px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #000;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.close:hover {
+  color: #f00;
+}
+
+/* Icono voces y musica */
+
+.fa-solid {
+    font-size: 17px;
+    color: #013983;
+    filter: saturate(1.5)
+}
+/* boton reproducir */
+.music {
+    background-color: rgba(255, 255, 255, 0.1); /* Color de fondo azul: (1, 57, 131, 0.1) con opacidad del 50% */
+    margin-left: 10px;
+    /* boton circular */
+    display: block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 0;
+    outline: none !important;
+}
+/* Voces */
+.voice-card {
+  display: flex;
+  align-items: center;
+  /*border: 1px solid rgba(204, 204, 204, 0.3); /*border: 1px solid #ccc;*/
+  padding: 2px;
+  border-radius: 10px;
+  width: 50%;
+}
+
+.voice-card label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer; /* cambia el cursor a una mano */
+}
+
+
+/* Agrega estilos CSS para dividir en dos columnas */
+    #voiceCards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Espacio entre las tarjetas */
+    }
+
+    .voice-card {
+        width: calc(50% - 5px); /* Cada tarjeta ocupa el 50% del contenedor menos el espacio entre ellas */
+        box-sizing: border-box;
+    }
+
+/* Estilo para el contenedor para hacer scroll en voces */
+  .card-body-scrollable {
+    max-height: 300px; /* Ajusta el alto máximo que desees */
+    overflow-y: auto; /* Agrega un scroll vertical si es necesario */
+  }
+
+/* Icono musica */
+
+    /* Estilos para las tarjetas de música */
+    #musicCards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .music-card {
+        display: flex;
+        align-items: center;
+        /*border: 1px solid rgba(204, 204, 204, 0.3); /*border: 1px solid #ccc;*/
+        padding: 2px;
+        border-radius: 10px;
+        width: 50%;
+        width: calc(50% - 5px);
+        box-sizing: border-box;
+    }
+
+    .music-card label {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      cursor: pointer; /* cambia el cursor a una mano */
+    }
+
+
+@media (max-width: 768px) {
+    #sidebar-container {
+      display: none;
+    }
+    .stat {
+        border: 0;
+    }
+
+
+  }
+

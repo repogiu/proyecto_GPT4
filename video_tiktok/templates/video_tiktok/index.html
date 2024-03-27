@@ -1,0 +1,271 @@
+
+{% extends "video_tiktok/base.html" %}
+{% load static %}
+
+{% block content %}
+            <!-- Page Content -->
+        <div id="content" class="bg-primary w-100">
+
+              <section class="bg-primary py-3" >
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-8" >
+
+                        <div class="accordion " id="accordionExample">
+                          <div class="card bg-primary">
+                            <div class="card-header" id="headingOne">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left d-flex align-items-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  <h5 class="texto-blanco font-weight-bold mb-0">Crea tu próximo video con la tecnologia de <span class="blue">VRLabs</span></h5><i class="fa-solid fa-caret-down ml-2" style="color: #ffffff;"></i>
+                                </button>
+                              </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div class="card-body" >
+                               <p class="text-muted">¿Te gustaría crear <b>videos cortos de 90 segundos</b> para TikTok con <em>inteligencia artificial</em>? Con <strong>VRLabs</strong>, puedes generar <em>guiones originales y personalizados</em> para tus videos en solo 10 minutos!. La inteligencia artificial te ayuda a elegir las mejores <strong>palabras, imágenes y sonidos</strong> para captar la atención de tu audiencia. Pruébalo <em>gratis</em> hoy mismo y descubre todo lo que puedes hacer con VRLabs. </p>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <!--<p >¿Te gustaría crear videos cortos de 90 segundos para TikTok con inteligencia artificial? Con VRLabs, puedes generar guiones originales y personalizados para tus videos en solo 10 minutos!. La inteligencia artificial te ayuda a elegir las mejores palabras, imágenes y sonidos para captar la atención de tu audiencia. Pruébalo gratis hoy mismo y descubre todo lo que puedes hacer con VRLabs. </p>-->
+                      </div>
+
+                     </div>
+                      <!--<div class="col-lg-12 col-md-4 d-flex justify-content-end">
+                        <button class="btn btn-primary w-45px h-20 px mr-3" >Nuevo video</button>
+                      </div>-->
+                  </div>
+                </section>
+
+
+              <section>
+                <div class="container">
+                    <div class="row">
+
+
+
+                        <!-- Columna de formulario y opciones -->
+                        <div class="col-lg-12 my-3">
+                            <div class="card rounded-0 scrollable-card bg-primary" >
+                                <!--<div class="card-header bg-light" style="text-align: center;">
+                                    <h6 class="text-light font-weight-bold mb-0">Comencemos...</h6>
+                                </div>-->
+                                <div class="card-body pt-2 bg-primary" style="border: 1px solid rgba(204, 204, 204, 0.3); border-radius: 20px;">
+                                    <div class="container my-4">
+                                        <div class="row">
+                                            <div class="col-12">
+
+                                                <!-- Formulario de guion -->
+                                                <form id="scriptForm">
+                                                    {% csrf_token %}
+
+                                                    <div class="form-group text-light">
+                                                        <label for="videoScript">Tema del Guión</label>
+                                                        <textarea class="form-control bg-secundary text-light" id="videoScript" rows="3" placeholder="Entre sus principales atractivos se encuentran el Paseo Santa Lucía, la Macroplaza, el Parque Fundidora, las basílicas de Nuestra Señora del Roble, La Purísima Concepción y de Guadalupe, el Hotel Ancira, el Museo de Historia Mexicana, y el Barrio Antiguo."></textarea>
+                                                    </div>
+
+                                                    <!-- Botón para generar el guion -->
+                                                    <button type="button" class="btn btn-primary" onclick="generateScript()">Generar Guión</button>
+                                                    <!-- Agregar un span para mostrar el tilde junto al botón -->
+                                                    <span id="generatedScriptCheckButton" class="text-white ml-2"></span>
+
+
+                                                    <!-- Spinner Guion-->
+                                                    <div class="overlay" id="overlay" >
+                                                      <div class= "spinner-container" id="spinner-container" >
+                                                        <div  class= "title_spinner" id="spinner-text" >Generando guion ...</div>
+                                                        <span class="spinner spinner-grow text-primary" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                        <span class="spinner spinner-grow text-success" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                        <span class="spinner spinner-grow text-danger" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                        <span class="spinner spinner-grow text-warning" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                        <span class="spinner spinner-grow text-info" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                      </div>
+                                                    </div>
+
+                                                    <!-- Modal con mensaje de error: Guion -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                          <div class="modal-header bg-danger text-white">
+                                                            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle"></i>  ¡Oops! Ha ocurrido un error... </h5>
+                                                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>-->
+                                                          </div>
+                                                          <div class="modal-body" id="modalBody">
+                                                            Lo sentimos, no hemos podido generar el guión que solicitaste. Por favor, inténtalo de nuevo más tarde.
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+
+                                                </form>
+
+
+                                                <!-- Área de guion generado -->
+                                                <div class="form-group mt-4 text-light">
+                                                    <label for="generatedScript">Guión Generado</label>
+                                                    <textarea class="form-control bg-secundary text-light" id="generatedScript" rows="6"></textarea>
+                                                </div>
+
+                                                <!-- Elemento donde se mostrará el contador de caracteres -->
+                                                <div class="text-light">
+                                                <span class="text-light" id="counter">0</span> caracteres
+                                                </div>
+                                                <br>
+
+
+
+                                                <!-- Botón para confirmar cambios -->
+                                                <button type="button" id="generatedPrompt" class="btn btn-outline-light w-90 mb-2" onclick="generateScript()">Regenerar Guión</button>
+                                                <!-- Agregar un span para mostrar el tilde junto al botón -->
+                                                <span id="generatedImageCheckButton" class="text-white ml-2"></span>
+
+                                                    <!-- Spinner imagenes -->
+                                                    <div class="overlay" id="overlay-imagenes" >
+                                                      <div class= "spinner-container" id="spinner-container-imagenes" >
+                                                        <div  class= "title_spinner" id="spinner-text-imagenes" >Generando imagenes...</div>
+                                                        <span class="spinner spinner-grow text-primary" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                        <span class="spinner spinner-grow text-success" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                        <span class="spinner spinner-grow text-danger" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                        <span class="spinner spinner-grow text-warning" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                        <span class="spinner spinner-grow text-info" role="status">
+                                                          <span class="sr-only">Loading...</span>
+                                                        </span>
+
+                                                      </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </section>
+
+           </div>
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+/* Script para contar caracteres: src="{% static 'video_tiktok/JS/script.js' %}"  */
+<script >
+    // Obtener el elemento textarea con el id “generatedScript”
+    var textarea = document.getElementById("generatedScript");
+
+    // Obtener el elemento span donde se mostrará el contador de caracteres
+    var counter = document.getElementById("counter");
+
+    // Crear una función que se ejecute cada vez que se cambie el contenido del textarea
+    function countCharacters() {
+        // Obtener el valor del textarea
+        var text = textarea.value;
+        // Obtener la longitud del texto
+        var length = text.length;
+
+        // Mostrar la longitud en el elemento span
+        counter.textContent = length;
+        }
+
+    // Añadir un evento al textarea para que se ejecute la función al cambiar el contenido
+    textarea.addEventListener("input", countCharacters);
+</script>
+
+
+<!-- Script para generar guion -->
+<script>
+    function generateScript() {
+      //Obtener los valores de los campos de entrada
+      const title = $('#videoTitle').val();
+      const script = $('#videoScript').val();
+
+      // Obtener el elemento overlay por su id
+      var overlay = document.getElementById("overlay");
+      // Cambiar el estilo de display a block para mostrarlo
+      overlay.style.display = "block";
+
+      //Enviar una solicitud POST
+      $.ajax({
+        type: 'POST',
+        url: '{% url "generate_script" %}',
+        data: {
+          videoTitle: title,
+          videoScript: script,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        dataType: 'json',
+        success: function (response) {
+          // Ocultar el overlay
+          overlay.style.display = "none";
+
+          // Mostrar la respuesta
+          $('#generatedScript').val(response.generated_script);
+          // Llamar manualmente a la función countCharacters para actualizar el contador de caracteres
+          countCharacters();
+          // Actualizar la visualización de créditos en el HTML
+          //console.log('Créditos actualizados:', response.creditos_actualizados);
+          //$('.creditos-container a').html(
+          //`<span style="font-weight: bold; font-size: 19px; margin-right: 10px;"> <strong>${response.creditos_actualizados}</strong></span><span class="coin"><i class="fas fa-coins"></i></span><button class="btn btn-primary" style="border-radius: 20px; text-align: center;">Créditos</button>`);
+          $('#generatedScriptCheckButton').html('<i class="fas fa-check-square fa-2x text-success"></i>');
+         },
+        error: function (error) {
+          // Ocultar el overlay también en caso de error
+          overlay.style.display = "none";
+
+          // Mostrar el modal con el mensaje de error
+          $('#exampleModal').modal('show');
+
+          // Usar el argumento responseJSON para acceder al error que devuelves en el return
+          $("#modalBody").html(error.responseJSON.error);
+
+          // Log del error
+          console.log(error);
+        }
+      });
+    }
+
+</script>
+
+
+{% endblock %}

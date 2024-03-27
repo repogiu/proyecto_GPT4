@@ -1,0 +1,50 @@
+<body style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/media/fondo/artificial_intelligence.jpg'); background-size: cover; background-position: 80% 50%; background-repeat: no-repeat;
+overflow-y: scroll;">
+{% extends "video_tiktok/base.html" %}
+
+{% load i18n static %}
+
+{% block content %}
+<style>
+    /* Formulario */
+
+    .form-control {
+        background-color: #26272c !important;
+        color: white !important;
+    }
+
+    #id_email.form-control{
+        background-color: #26272c !important;
+        color: white !important;
+    }
+
+    input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px #26272c inset !important;
+      -webkit-text-fill-color: white !important;
+    }
+</style>
+
+{% load crispy_forms_tags %}
+<img src="{% static 'video_tiktok/logo/vrlabs.png' %}" class="img-fluid" alt="Logo" width="10" style="position: absolute; top: 10px;" />
+<img src="{% static 'video_tiktok/logo/vrlabs.png' %}" class="img-fluid" alt="Logo" width="150" style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" />
+<form method="post" action="" >
+    {% csrf_token %}
+    <br><br><br>
+    <div class="card mx-auto mt-3" style="width: 35rem; color: white; background-color: #171717; border-radius: 15px;">
+      <div class="card-body">
+        <h5 class="card-title" style="text-align: center;"><strong>Registra una cuenta</strong></h5>
+        <br>
+        {% csrf_token %}
+
+        {{ form | crispy }}
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <button type="submit" class="btn btn-primary mt-3 mb-1" style="margin: auto; width: 80%; filter: saturate(1.5);">Registrarte</button>
+        </div>
+        <div style="text-align: center;">
+          <a href="{% url 'loguear' %}">¿Ya tienes una cuenta?</a>
+        </div>
+        <br>
+      </div>
+    </div>
+</form>
+{% endblock %}

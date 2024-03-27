@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% load static %}
+<!-- {% static 'path' %} -->
+
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'video_tiktok/css/style/style.css' %}">
+
+    <!-- Ionic icons -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <!-- Fuente Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+    <title>Dashboard - VRLabs</title>
+
+</head>
+
+<body>
+    <div class="d-flex" id="content-wrapper">
+
+        <!-- Sidebar -->
+        {% if user.is_authenticated %}
+        <div id="sidebar-container" class="bg-primary">
+
+            <div class="logo">
+                <!--<img src="{% static 'video_tiktok/logo/logos.png' %}" class="img-fluid" alt="Logout icon" width="150" /> -->
+                <h2 class="texto-degradado font-weight-bold mb-0">VRLabs</h2>
+            </div>
+            <br>
+            <!--<div class="d-flex justify-content-center mt-3">
+                <form class="form-inline position-relative my-2">
+                <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
+                <button class="btn position-absolute btn-search" type="submit"><i class="icon ion-md-search"></i></button>
+            </form>
+
+            </div>-->
+
+            <div class="menu">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'index' %}" class="d-block text-light p-3 border-0"><ion-icon name="videocam" class="mr-3 lead"></ion-icon> Estudio</a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'perfil' user.username %}" class="d-block text-light p-3 border-0"><ion-icon name="person" class="mr-3 lead"></ion-icon> Tu perfil</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <!-- Fin sidebar -->
+
+        <div class="w-100">
+
+         <!-- Navbar -->
+        {% if user.is_authenticated %}
+         <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+         <nav class="navbar navbar-expand navbar-light bg-light">
+            <div class="container">
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+
+                <!--<form class="form-inline position-relative d-inline-block my-2">
+                  <input class="form-control bg-secundary text-light" type="search" placeholder="Buscar" aria-label="Buscar">
+                  <button class="btn position-absolute btn-search" type="submit"><i class="icon ion-md-search"></i></button>
+                </form>-->
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                  {% if request.user.is_authenticated %}
+                    <li class="d-block p-3 border-0">
+                        <form action="{% url 'logout' %}" method="post">
+                          {% csrf_token %}
+                          <!--<button type="submit" class="btn btn-danger " style="border-radius: 50px; font-size: 13px;">Cerrar sesión</button>-->
+
+                        </form>
+                  </li>
+                {% endif %}
+
+                  {% if request.user.is_authenticated %}
+                      <li class="nav-item dropdown">
+                        <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <img src="{{ user.profile.image.url }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background-color: #080f25;"
+                               alt="" />  Hola, {{user.username | upper}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{% url 'perfil' user.username %}">Mi perfil</a>
+                          <div class="dropdown-divider"></div>
+                          {% if request.user.is_authenticated %}
+                            <form action="{% url 'logout' %}" method="post">
+                              {% csrf_token %}
+                              <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                            </form>
+                          {% else %}
+                            <a class="dropdown-item" href="{% url 'loguear' %}">Iniciar sesión</a>
+                          {% endif %}
+                        </div>
+
+                      </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </nav>
+          {% endif %}
+          <!-- Fin Navbar -->
+            {% block content %}
+            {% endblock %}
+
+        </div>
+    </div>
+
+    <!-- Ionic icons scripts -->
+    <script  type = "module"  src = "https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script  nomodule  src = "https://unpkg .com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Iconos fontawesome -->
+    <script src="https://kit.fontawesome.com/6d027b94cc.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+    <!-- Incluir jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+{% block scripts %}
+
+{% endblock %}
+
+</body>
+
+</html>

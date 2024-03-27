@@ -1,0 +1,49 @@
+<body style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/media/fondo/artificial_intelligence.jpg'); background-size: cover; background-position: 80% 50%; background-repeat: no-repeat;
+overflow-y: scroll;">
+
+{% extends "video_tiktok/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    /* Formulario */
+
+    input {
+        background-color: #26272c !important;
+        color: white !important;
+    }
+
+
+    input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px #26272c inset !important;
+      -webkit-text-fill-color: white !important;
+    }
+</style>
+
+{% load crispy_forms_tags %}
+<img src="{% static 'video_tiktok/logo/vrlabs.png' %}" class="img-fluid" alt="Logo" width="150" style="position: absolute; top: 10px; left: 10px;" />
+<form method="post" action="">
+    {% csrf_token %}
+    <br><br><br><br>
+    <div class="card mx-auto" style="width: 25rem; color: white; background-color: #171717; border-radius: 15px;">
+      <div class="card-body">
+        <img src="{% static 'video_tiktok/logo/logo_brillo.png' %}" class="img-fluid" alt="Logout icon" width="200" style="display: block; margin: auto;" />
+        <h5 class="card-title">Regístrate o inicia sesión</h5>
+        {{ form | crispy }}
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <button type="submit" class="btn btn-primary mt-3 mb-1" style="margin: auto; width: 100%; filter: saturate(1.5);">Iniciar Sesión</button>
+
+        </div>
+        <div style="text-align: center;">
+          <a href="{% url 'password_reset' %}"><i class="fas fa-key" ></i>¿Olvidaste tu contraseña?</a>
+        </div>
+        <br>
+        <a href="{% url 'Usuario' %}" class="card-link float-right" style="color:#FFFFFF"> Registrarte</a>
+
+      </div>
+    </div>
+
+</form>
+
+{% endblock %}
+
